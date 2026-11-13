@@ -126,6 +126,7 @@
         }
         let gameTimer;
         const startGame = () => {
+            clearInterval(gameTimer);
             gameTimer = setInterval(() => {
                 movesnake();
                 drawGame();
@@ -154,25 +155,6 @@
                 direction = newDirection
             }
         })
-
-
-        
-
-        // ===================================
-        // BUILD THE GAME FROM HERE
-        // ===================================
-        //
-        // Use your custom agent in VS Code Chat 
-        // to guide your work through each step. 
-        // Commit regularly.
-        //
-        // Step 1: Movement (game loop)
-        // Step 2: Keyboard controls (arrow keys)
-        // Step 3: Eating and growing
-        // Step 4: Game over
-        // Step 5: Improvements
-        //
-        // ===================================
 
     </script>
 
