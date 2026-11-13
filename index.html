@@ -17,6 +17,8 @@
     <canvas id="gameCanvas" width="400"
             height="400"></canvas>
     <p id="info"></p>
+    <button id="restartButton">Restart</button>
+
 
     <script>
         // ===== GAME SETUP =====
@@ -35,6 +37,7 @@
         let direction = { x: 1, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
+        let gameOver=0;
 
         // ===== DRAWING =====
         const drawGame = () => {
@@ -58,6 +61,23 @@
             }
         };
 
+        const restartGame = () => {
+            snake = [
+                { x: 10, y: 10 },
+                { x: 9, y: 10 },
+                { x: 8, y: 10 }
+            ];
+            direction = { x: 1, y: 0 };
+            food = { x: 15, y: 15 };
+            score = 0;
+            gameOver=0;
+            document.getElementById("info").innerText = "Score: " + score;
+            clearInterval(gameTimer);
+            drawGame();
+            startGame();        
+        }
+
+
         const movesnake = () => {
             const headx=snake[0].x
             const heady=snake[0].y
@@ -66,6 +86,19 @@
                 x : headx + direction.x,
                 y : heady + direction.y
             }
+            const collision =
+                newHead.x < 0 ||
+                newHead.x >= tileCount ||
+                newHead.y < 0 ||
+                newHead.y >= tileCount;
+
+            if (collision) {
+                document.getElementById("info").innerText =
+                     "Game Over! Final Score: " + score;
+                clearInterval(gameTimer);
+                return;
+            }
+            
             snake.unshift(newHead)
             document.getElementById("info").innerText = "Score: " + score
             
@@ -90,11 +123,18 @@
                 snake.pop();
             }
         }
-        
-        setInterval(() => {
-            movesnake();
-            drawGame();
-        }, 150);
+        let gameTimer;
+        const startGame = () => {
+            gameTimer = setInterval(() => {
+                movesnake();
+                drawGame();
+            }, 150);
+};
+
+        startGame();
+
+        document.getElementById("restartButton")
+            .addEventListener("click", restartGame);
 
         document.addEventListener("keydown",(event)=>{
             let newDirection = direction
