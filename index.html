@@ -37,7 +37,6 @@
         let direction = { x: 1, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
-        let gameOver=0;
 
         // ===== DRAWING =====
         const drawGame = () => {
@@ -90,7 +89,9 @@
                 newHead.x < 0 ||
                 newHead.x >= tileCount ||
                 newHead.y < 0 ||
-                newHead.y >= tileCount;
+                newHead.y >= tileCount ||
+                snake.some(segment => segment.x === newHead.x &&
+                      segment.y === newHead.y)
 
             if (collision) {
                 document.getElementById("info").innerText =
