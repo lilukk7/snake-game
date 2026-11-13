@@ -67,6 +67,8 @@
                 y : heady + direction.y
             }
             snake.unshift(newHead)
+            document.getElementById("info").innerText = "Score: " + score
+            
             if (newHead.x === food.x && newHead.y === food.y)  {
                 score++
                 document.getElementById("info").innerText = "Score: " + score
