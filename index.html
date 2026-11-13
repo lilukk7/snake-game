@@ -37,6 +37,7 @@
         let direction = { x: 1, y: 0 };
         let food = { x: 15, y: 15 };
         let score = 0;
+        let snakecolor= "black";
 
         // ===== DRAWING =====
         const drawGame = () => {
@@ -50,7 +51,7 @@
                 gridSize, gridSize
             );
 
-            ctx.fillStyle = "black";
+            ctx.fillStyle = snakecolor;
             for (const segment of snake) {
                 ctx.fillRect(
                     segment.x * gridSize,
@@ -105,6 +106,18 @@
             
             if (newHead.x === food.x && newHead.y === food.y)  {
                 score++
+                if (score>5) {
+                    snakecolor = "green";
+                }
+                if (score>10) {
+                    snakecolor = "orange";
+                }
+                if (score>15) {
+                    snakecolor = "red";
+                }
+                if (score>20) {
+                    snakecolor = "purple";
+                }
                 document.getElementById("info").innerText = "Score: " + score
                 
                 food = {
