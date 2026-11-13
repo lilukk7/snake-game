@@ -69,12 +69,32 @@
             snake.unshift(newHead);
             snake.pop();
         }
+        
         setInterval(() => {
             movesnake();
             drawGame();
         }, 150);
 
-       
+        document.addEventListener("keydown",(event)=>{
+            let newDirection = direction
+            switch(event.key){
+                case "ArrowUp":
+                    newDirection = {x:0,y:-1}
+                    break;
+                case "ArrowDown": newDirection = {x:0,y:1}
+                    break;
+                case "ArrowLeft": newDirection = {x:-1,y:0}
+                    break;
+                case "ArrowRight": newDirection = {x:1,y:0}
+                    break;
+            }
+            if (newDirection.x*direction.x !==-1 && newDirection.y*direction.y !==-1) {
+                direction = newDirection
+            }
+        })
+
+
+        
 
         // ===================================
         // BUILD THE GAME FROM HERE
