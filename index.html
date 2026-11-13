@@ -66,8 +66,27 @@
                 x : headx + direction.x,
                 y : heady + direction.y
             }
-            snake.unshift(newHead);
-            snake.pop();
+            snake.unshift(newHead)
+            if (newHead.x === food.x && newHead.y === food.y)  {
+                score++
+                document.getElementById("info").innerText = "Score: " + score
+                
+                food = {
+                    x: Math.floor(Math.random() * tileCount),
+                    y: Math.floor(Math.random() * tileCount)
+                };
+                while (snake.some(segment => segment.x === food.x && segment.y === food.y)) {
+                    // If the new food position is on the snake, generate a new one
+                    food = {
+                        x: Math.floor(Math.random()*tileCount),
+                        y: Math.floor(Math.random()*tileCount)
+                    };
+                }
+                
+            }
+            else {
+                snake.pop();
+            }
         }
         
         setInterval(() => {
